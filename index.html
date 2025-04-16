@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grid Image Toggle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+      gap: 8px;
+      width: 500px;
+      height: 500px;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .grid-container:has(.active-0) {
+      grid-template-columns: 100% auto;
+      grid-template-rows: 100% auto;
+      transition: all 0.5s ease-in-out;
+      gap: 0;
+    }
+
+    .grid-item {
+      max-width: 100%;
+      max-height: 100%;
+      opacity: 1;
+      overflow: hidden;
+      pointer-events: auto;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .grid-container:has(.active) .grid-item:not(.active) {
+      max-width: 0;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+
+  <div class="grid-container">
+    <div class="grid-item cursor-pointer"><img src="https://plus.unsplash.com/premium_photo-1726825200664-a58abaa5fb6b?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /></div>
+    <div class="grid-item cursor-pointer"><img src="https://images.unsplash.com/photo-1741513543210-c17d608be117?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /></div>
+    <div class="grid-item cursor-pointer"><img src="https://images.unsplash.com/photo-1741610748460-fb2e33cc6390?q=80&w=3086&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /></div>
+    <div class="grid-item cursor-pointer"><img src="https://images.unsplash.com/photo-1742827871480-4962b0653e1d?q=80&w=3284&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" /></div>
+  </div>
+
+  <script>
+    const container = document.querySelector('.grid-container');
+    const items = document.querySelectorAll('.grid-item');
+
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        item.classList.toggle(`active`);
+        item.classList.toggle(`active-${index}`);
+      });
+    });
+  </script>
+
+</body>
+</html>
